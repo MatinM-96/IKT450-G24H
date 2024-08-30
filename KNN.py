@@ -21,7 +21,6 @@ class MyKnn:
     def calculateTheDistance(self, x_data):
         distances = []
 
-
         #iterating over each point and find the distance
         for x in  self.xTrain:
 
@@ -35,10 +34,15 @@ class MyKnn:
             #append each distnace to our array
             distances.append(distance)
 
+        sortedIndicate = np.argsort(distances)
+
+        lastResult = []
 
 
+        for i in range(self.k):
+            lastResult.append(sortedIndicate[i])
 
-
+        return lastResult
 
 
 def runKNN():
@@ -51,6 +55,8 @@ def runKNN():
     df = pd.read_csv(file_path, header=None)
 
     x = df.drop(columns=[df.shape[1] - 1])  # All columns except the last one
+
+   # normlay in the last clomun stored the answer
     y = df[df.shape[1] - 1]  # The last column
 
     # Convert X and y to numpy arrays for easier handling
@@ -60,6 +66,16 @@ def runKNN():
     model = MyKnn(k=3)
 
     model.fit(x, y)
+
+    test_index = 0  # Index of the data point you want to test
+    test_data_point = x[test_index]
+
+
+    distance = model.calculateTheDistance(test_data_point)
+
+    print(f"Distances from test data point at index {test_index} to all training points:")
+    print(distance)
+
 
 
 
