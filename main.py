@@ -1,8 +1,10 @@
-﻿from knn_Algo.KNN_Run import RunKNN
+﻿from KNN import runKNN
+
+
 
 def print_hi(name):
 
-    RunKNN()
+    runKNN()
 
 
 
